@@ -8,7 +8,7 @@
     "containerDefinitions": [
       {
         "name": "llmops-live-container",
-        "image": "306570692493.dkr.ecr.us-east-1.amazonaws.com/llmopsrepolive",
+        "image": "960346386165.dkr.ecr.eu-north-1.amazonaws.com/llmopsrepolive",
         "cpu": 1024,
         "essential": true,
         "portMappings": [
@@ -28,8 +28,8 @@
         ],
         "secrets": [
           {
-            "name": "apikeyliveclass",
-            "valueFrom": "arn:aws:secretsmanager:us-east-1:306570692493:secret:apikeyliveclass-EykEZf"
+            "name": "apiliveclass",
+            "valueFrom": "arn:aws:secretsmanager:eu-north-1:960346386165:secret:apiliveclass-OVD1PA"
           }
   
         ],
