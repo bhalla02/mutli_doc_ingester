@@ -1,0 +1,49 @@
+{"timestamp": "2026-04-20T17:44:15.631630Z", "level": "info", "event": "Running in LOCAL mode: .env loaded"}
+{"timestamp": "2026-04-20T17:44:15.631947Z", "level": "info", "event": "Loaded GROQ_API_KEY from individual env var"}
+{"keys": {"GROQ_API_KEY": "dummy..."}, "timestamp": "2026-04-20T17:44:15.632092Z", "level": "info", "event": "API keys loaded"}
+{"config_keys": ["embedding_model", "retriever", "llm"], "timestamp": "2026-04-20T17:44:15.640210Z", "level": "info", "event": "YAML config loaded"}
+{"model": "all-MiniLM-L6-v2", "provider": "local", "timestamp": "2026-04-20T17:44:15.640394Z", "level": "info", "event": "Loading embedding model"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+Loading faiss with AVX2 support.
+Successfully loaded faiss with AVX2 support.
+HTTP Request: POST http://testserver/chat "HTTP/1.1 400 Bad Request"
+HTTP Request: POST http://testserver/chat "HTTP/1.1 400 Bad Request"
+HTTP Request: POST http://testserver/chat "HTTP/1.1 200 OK"
+HTTP Request: POST http://testserver/chat "HTTP/1.1 500 Internal Server Error"
+HTTP Request: POST http://testserver/upload "HTTP/1.1 200 OK"
+HTTP Request: POST http://testserver/upload "HTTP/1.1 422 Unprocessable Entity"
+HTTP Request: POST http://testserver/upload "HTTP/1.1 500 Internal Server Error"
+{"session_id": "session_20260420_231506_3e5ba86e", "temp_dir": "data\\session_20260420_231506_3e5ba86e", "faiss_dir": "faiss_index\\session_20260420_231506_3e5ba86e", "sessionized": true, "timestamp": "2026-04-20T17:45:06.058665Z", "level": "info", "event": "ChatIngestor initialized"}
+{"session_id": "session_20260420_231506_51782135", "temp_dir": "data\\session_20260420_231506_51782135", "faiss_dir": "faiss_index\\session_20260420_231506_51782135", "sessionized": true, "timestamp": "2026-04-20T17:45:06.064397Z", "level": "info", "event": "ChatIngestor initialized"}
+{"chunks": 3, "chunk_size": 500, "overlap": 100, "timestamp": "2026-04-20T17:45:06.066367Z", "level": "info", "event": "Documents split"}
+`embedding_function` is expected to be an Embeddings object, support for passing in a function will soon be removed.
+{"session_id": "s1", "timestamp": "2026-04-20T17:45:06.079993Z", "level": "info", "event": "LLM loaded successfully"}
+{"session_id": "s1", "timestamp": "2026-04-20T17:45:06.080241Z", "level": "info", "event": "ConversationalRAG initialized"}
+{"error": "Error in [<unknown>] at line [-1] | Message: RAG chain not initialized. Call load_retriever_from_faiss() before invoke().", "timestamp": "2026-04-20T17:45:06.080380Z", "level": "error", "event": "Failed to invoke ConversationalRAG"}
+{"error": "FAISS index directory not found: faiss_index/does_not_exist", "timestamp": "2026-04-20T17:45:06.081291Z", "level": "error", "event": "Failed to load retriever from FAISS"}

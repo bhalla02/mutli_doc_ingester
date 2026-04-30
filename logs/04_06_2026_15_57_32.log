@@ -1,0 +1,11 @@
+{"timestamp": "2026-04-06T10:27:32.676143Z", "level": "info", "event": "Running in LOCAL mode: .env loaded"}
+{"timestamp": "2026-04-06T10:27:32.676594Z", "level": "info", "event": "Loaded GROQ_API_KEY from individual env var"}
+{"timestamp": "2026-04-06T10:27:32.676896Z", "level": "info", "event": "Loaded GOOGLE_API_KEY from individual env var"}
+{"keys": {"GROQ_API_KEY": "gsk_NQ...", "GOOGLE_API_KEY": "AIzaSy..."}, "timestamp": "2026-04-06T10:27:32.677120Z", "level": "info", "event": "API keys loaded"}
+{"config_keys": ["embedding_model", "retriever", "llm"], "timestamp": "2026-04-06T10:27:32.687600Z", "level": "info", "event": "YAML config loaded"}
+{"session_id": "session_20260406_155732_37f067f0", "temp_dir": "data\\session_20260406_155732_37f067f0", "faiss_dir": "faiss_index\\session_20260406_155732_37f067f0", "sessionized": true, "timestamp": "2026-04-06T10:27:32.689141Z", "level": "info", "event": "ChatIngestor initialized"}
+{"uploaded": "C:\\Users\\sarth\\LLmops_rag\\Data\\NIPS-2017-attention-is-all-you-need-Paper.pdf", "saved_as": "data\\session_20260406_155732_37f067f0\\a5f26dd4.pdf", "timestamp": "2026-04-06T10:27:32.690704Z", "level": "info", "event": "File saved for ingestion"}
+{"count": 11, "timestamp": "2026-04-06T10:27:33.053972Z", "level": "info", "event": "Documents loaded"}
+{"chunks": 207, "chunk_size": 200, "overlap": 20, "timestamp": "2026-04-06T10:27:33.058917Z", "level": "info", "event": "Documents split"}
+{"model": "models/embedding-001", "timestamp": "2026-04-06T10:27:33.059615Z", "level": "info", "event": "Loading embedding model"}
+{"error": "Error embedding content: 404 models/embedding-001 is not found for API version v1beta, or is not supported for embedContent. Call ListModels to see the list of available models and their supported methods.", "timestamp": "2026-04-06T10:27:33.715729Z", "level": "error", "event": "Failed to build retriever"}

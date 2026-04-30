@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MultiDocChat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:#0b1020;
+    color:#fff;
+    min-height:100vh;
+}
+
+.wrapper{
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:700;
+}
+
+.badge{
+    background:#1f2a4a;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:13px;
+}
+
+.card{
+    background:#121933;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:24px;
+    margin-bottom:24px;
+}
+
+.title{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.sub{
+    color:#9aa4c7;
+    margin-bottom:20px;
+}
+
+#dropzone{
+    border:2px dashed #33406e;
+    border-radius:16px;
+    padding:35px;
+    text-align:center;
+    transition:.25s;
+}
+
+#dropzone.hover{
+    border-color:#4c7dff;
+    background:#192347;
+}
+
+#dropzone p{
+    margin-bottom:12px;
+    color:#c8d0f0;
+}
+
+.btn{
+    display:inline-block;
+    background:#4c7dff;
+    color:#fff;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn:hover{
+    opacity:.92;
+}
+
+#file-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.chip{
+    background:#1c2447;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+}
+
+.upload-row{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-top:18px;
+}
+
+.hint{
+    color:#9aa4c7;
+    font-size:14px;
+}
+
+#chat{
+    display:none;
+    flex-direction:column;
+}
+
+.chat-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+#messages{
+    height:420px;
+    overflow-y:auto;
+    background:#0e1430;
+    border-radius:16px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.bubble{
+    padding:12px 15px;
+    border-radius:14px;
+    margin-bottom:12px;
+    max-width:78%;
+    line-height:1.5;
+    white-space:pre-wrap;
+}
+
+.user{
+    margin-left:auto;
+    background:#4c7dff;
+}
+
+.assistant{
+    background:#1d2649;
+}
+
+.composer{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+}
+
+textarea{
+    flex:1;
+    resize:none;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#1a2345;
+    color:#fff;
+    padding:14px;
+    min-height:54px;
+    font-family:inherit;
+}
+
+.send{
+    width:120px;
+}
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#1c2447;
+    padding:12px 18px;
+    border-radius:999px;
+    opacity:0;
+    transition:.3s;
+}
+
+.show{
+    opacity:1;
+}
+
+@media(max-width:700px){
+    .composer{
+        flex-direction:column;
+    }
+
+    .send{
+        width:100%;
+    }
+
+    .bubble{
+        max-width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+<div class="logo">MultiDocChat</div>
+<div class="badge">AI Powered</div>
+</header>
+
+<section class="card">
+
+<div class="title">Chat with your documents</div>
+<div class="sub">Upload PDF, DOCX or TXT files and ask anything instantly.</div>
+
+<form id="upload-form">
+
+<div id="dropzone">
+<p>Drag & Drop files here</p>
+<p>or</p>
+
+<label class="btn">
+Choose Files
+<input id="file-input" type="file" multiple hidden>
+</label>
+</div>
+
+<div id="file-chips"></div>
+
+<div class="upload-row">
+<button class="btn" id="upload-btn" type="submit">Upload & Index</button>
+<span class="hint" id="indexing" style="display:none;">Indexing...</span>
+</div>
+
+</form>
+
+</section>
+
+<section class="card" id="chat">
+
+<div class="chat-head">
+<div class="title" style="font-size:18px;">Conversation</div>
+<div class="hint" id="doc-count">0 docs</div>
+</div>
+
+<div id="messages"></div>
+
+<div class="composer">
+<textarea id="message-input" placeholder="Ask anything about your documents..."></textarea>
+<button class="btn send" id="send-btn">Send</button>
+<span class="hint" id="thinking" style="display:none;">Thinking...</span>
+</div>
+
+</section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = (s)=>document.querySelector(s);
+
+let sessionId = localStorage.getItem("mdc_session_id") || "";
+let uploadedCount = 0;
+
+/* upload */
+async function uploadFiles(e){
+    e.preventDefault();
+
+    const files = $("#file-input").files;
+
+    if(!files.length){
+        toast("Choose at least one file");
+        return;
+    }
+
+    toggleIndexing(true);
+
+    try{
+        const fd = new FormData();
+
+        for(const f of files){
+            fd.append("files", f);
+        }
+
+        const res = await fetch("/upload",{
+            method:"POST",
+            body:fd
+        });
+
+        const data = await res.json();
+
+        if(!res.ok){
+            throw new Error(data.detail || "Upload failed");
+        }
+
+        sessionId = data.session_id;
+        localStorage.setItem("mdc_session_id", sessionId);
+
+        uploadedCount = files.length;
+
+        $("#chat").style.display = "flex";
+        $("#doc-count").textContent =
+            uploadedCount + (uploadedCount===1 ? " doc":" docs");
+
+        toast("Documents indexed successfully");
+
+    }catch(err){
+        console.error(err);
+        toast(err.message);
+    }finally{
+        toggleIndexing(false);
+    }
+}
+
+/* send message */
+async function sendMessage(){
+    const input = $("#message-input");
+    const text = input.value.trim();
+
+    if(!sessionId){
+        toast("Upload documents first");
+        return;
+    }
+
+    if(!text) return;
+
+    appendMessage("user", text);
+
+    input.value = "";
+
+    toggleThinking(true);
+
+    try{
+        const res = await fetch("/chat",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                session_id:sessionId,
+                message:text
+            })
+        });
+
+        const data = await res.json();
+
+        if(!res.ok){
+            throw new Error(data.detail || "Chat failed");
+        }
+
+        appendMessage("assistant", data.answer);
+
+    }catch(err){
+        console.error(err);
+        toast(err.message);
+    }finally{
+        toggleThinking(false);
+    }
+}
+
+/* ui */
+function appendMessage(role,text){
+    const box = $("#messages");
+
+    const div = document.createElement("div");
+    div.className = "bubble " + role;
+    div.textContent = text;
+
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+}
+
+function toast(msg){
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+
+    setTimeout(()=>{
+        t.classList.remove("show");
+    },2500);
+}
+
+function toggleIndexing(on){
+    $("#upload-btn").disabled = on;
+    $("#indexing").style.display = on ? "inline" : "none";
+}
+
+function toggleThinking(on){
+    $("#send-btn").disabled = on;
+    $("#thinking").style.display = on ? "inline" : "none";
+}
+
+function showFiles(files){
+    const box = $("#file-chips");
+    box.innerHTML = "";
+
+    [...files].forEach(f=>{
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.textContent = f.name;
+        box.appendChild(chip);
+    });
+}
+
+/* init */
+window.addEventListener("DOMContentLoaded",()=>{
+
+    if(sessionId){
+        $("#chat").style.display = "flex";
+    }
+
+    $("#upload-form").addEventListener("submit", uploadFiles);
+
+    $("#send-btn").addEventListener("click", sendMessage);
+
+    $("#message-input").addEventListener("keydown",(e)=>{
+        if(e.key==="Enter" && !e.shiftKey){
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    $("#file-input").addEventListener("change",(e)=>{
+        showFiles(e.target.files);
+    });
+
+    const drop = $("#dropzone");
+
+    drop.addEventListener("dragover",(e)=>{
+        e.preventDefault();
+        drop.classList.add("hover");
+    });
+
+    drop.addEventListener("dragleave",()=>{
+        drop.classList.remove("hover");
+    });
+
+    drop.addEventListener("drop",(e)=>{
+        e.preventDefault();
+        drop.classList.remove("hover");
+
+        $("#file-input").files = e.dataTransfer.files;
+        showFiles(e.dataTransfer.files);
+    });
+
+});
+</script>
+
+</body>
+</html>
