@@ -14,6 +14,7 @@ from multi_Doc_chat.src.document_ingestion.data_ingestion import ChatIngestor
 from multi_Doc_chat.src.document_chat.retrieval import ConversationalRAG
 from langchain_core.messages import HumanMessage, AIMessage
 from multi_Doc_chat.Exception.custom_exception import DocumentPortalException
+from jinja2 import Environment, FileSystemLoader
 
 
 # ----------------------------
@@ -35,7 +36,9 @@ BASE_DIR = Path(__file__).resolve().parent
 static_dir = BASE_DIR / "static"
 templates_dir = BASE_DIR / "templates"
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
-templates = Jinja2Templates(directory=str(templates_dir))
+
+env = Environment(loader=FileSystemLoader(str(templates_dir)), cache_size=0)
+templates = Jinja2Templates(env=env)
 
 
 # ----------------------------
@@ -86,7 +89,10 @@ def health() -> Dict[str, str]:
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html"
+    )
 
 
 @app.post("/upload", response_model=UploadResponse)
