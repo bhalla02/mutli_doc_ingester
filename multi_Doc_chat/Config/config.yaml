@@ -3,7 +3,7 @@ embedding_model:
   model_name: "all-MiniLM-L6-v2"
 
 retriever:
-  top_k: 10
+  top_k: 8
   search_type: "mmr"  # Options: "similarity", "mmr", "similarity_score_threshold"
   # MMR (Maximal Marginal Relevance) parameters for diverse results
   fetch_k: 20  # Number of documents to fetch before MMR re-ranking (should be > top_k)
