@@ -21,4 +21,4 @@ EXPOSE 8080
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
-COPY multi_Doc_chat/Config/config.yaml /app/multi_Doc_chat/Config/config.yaml
+COPY multi_Doc_chat/config/config.yaml /app/multi_Doc_chat/config/config.yaml
