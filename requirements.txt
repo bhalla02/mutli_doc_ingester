@@ -22,3 +22,4 @@ langsmith
 openai
 pandas
 pytest
+pypdf
